@@ -1,0 +1,68 @@
+<section
+  id="why-us"
+  class="border-b border-border/60 py-20 sm:py-28"
+>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+      <div class="relative">
+        <div class="relative aspect-[4/5] overflow-hidden rounded-2xl border border-border">
+          <img
+            src="/images/artificial-turf.jpg"
+            alt="Crew installing premium landscaping"
+            class="object-cover w-full h-full"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
+        </div>
+        <div class="absolute -bottom-6 -right-4 hidden rounded-xl border border-primary/40 bg-card p-5 shadow-xl sm:block lg:-right-8">
+          <div class="flex items-center gap-3">
+            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+              <i class="pi pi-verified text-xl"></i>
+            </div>
+            <div>
+              <div class="font-display text-2xl font-bold text-foreground">
+                Trusted
+              </div>
+              <div class="text-xs uppercase tracking-widest text-muted-foreground">
+                Local Pros
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="font-display text-sm font-semibold uppercase tracking-[0.25em] text-primary">
+          Why Choose Us
+        </p>
+        <h2 class="mt-3 font-display text-4xl font-bold uppercase tracking-tight text-foreground text-balance sm:text-5xl">
+          Built on Trust. 
+          <span class="text-primary">Driven by Quality.</span>
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-muted-foreground">
+          At C&amp;C Landscaping &amp; Hardscape, we treat every yard like
+          our own. Our crew brings years of experience, the right
+          equipment, and a genuine passion for transforming outdoor
+          spaces.
+        </p>
+
+        <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          @for (p of points; track p.title) {
+            <div
+              class="rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/50"
+            >
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                <i [class]="p.iconClass" class="text-lg"></i>
+              </div>
+              <h3 class="mt-4 font-display text-lg font-bold uppercase tracking-wide text-foreground">
+                {{ p.title }}
+              </h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                {{ p.description }}
+              </p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
