@@ -1,16 +1,16 @@
 import {
-  AngularNodeAppEngine,
-  createNodeRequestHandler,
-  isMainModule,
-  writeResponseToNodeResponse,
+	AngularNodeAppEngine,
+	createNodeRequestHandler,
+	isMainModule,
+	writeResponseToNodeResponse,
 } from '@angular/ssr/node';
-import express from 'express';
+import express, { NextFunction, Request, RequestHandler, Response } from 'express';
 import { join } from 'node:path';
 
-const browserDistFolder = join(import.meta.dirname, '../browser');
+const browserDistFolder: string = join(import.meta.dirname, '../browser');
 
-const app = express();
-const angularApp = new AngularNodeAppEngine();
+const app: express.Express = express();
+const angularApp: AngularNodeAppEngine = new AngularNodeAppEngine();
 
 /**
  * Example Express Rest API endpoints can be defined here.
@@ -28,21 +28,27 @@ const angularApp = new AngularNodeAppEngine();
  * Serve static files from /browser
  */
 app.use(
-  express.static(browserDistFolder, {
-    maxAge: '1y',
-    index: false,
-    redirect: false,
-  }),
+	express.static(browserDistFolder, {
+		maxAge: '1y',
+		index: false,
+		redirect: false,
+	}),
 );
 
 /**
  * Handle all other requests by rendering the Angular application.
  */
-app.use((req, res, next) => {
-  angularApp
-    .handle(req)
-    .then((response) => (response ? writeResponseToNodeResponse(response, res) : next()))
-    .catch(next);
+app.use((
+	req: Request,
+	res: Response,
+	next: NextFunction
+): void => {
+	angularApp
+		.handle(req)
+		.then((response: globalThis.Response | null) =>
+			response ? writeResponseToNodeResponse(response, res) : next(),
+		)
+		.catch(next);
 });
 
 /**
@@ -50,20 +56,20 @@ app.use((req, res, next) => {
  * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
  */
 if (isMainModule(import.meta.url) || process.env['pm_id']) {
-  const portFromEnv = Number(process.env['PUERTO_SSR_SITIO_LANDSCAPING_HARDSCAPE']);
-  const port = Number.isFinite(portFromEnv) && portFromEnv >= 1024 && portFromEnv <= 65535
-    ? portFromEnv
-    : 4052;
-  app.listen(port, (error) => {
-    if (error) {
-      throw error;
-    }
+	const portFromEnv = Number(process.env['PUERTO_SSR_SITIO_LANDSCAPING_HARDSCAPE']);
+	const port = Number.isFinite(portFromEnv) && portFromEnv >= 1024 && portFromEnv <= 65535
+		? portFromEnv
+		: 4052;
+	app.listen(port, (error?: Error) => {
+		if (error) {
+			throw error;
+		}
 
-    console.log(`Landscaping Hardscape SSR server listening on http://localhost:${port}`);
-  });
+		console.log(`Landscaping Hardscape SSR server listening on http://127.0.0.1:${port}`);
+	});
 }
 
 /**
  * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
  */
-export const reqHandler = createNodeRequestHandler(app);
+export const reqHandler: RequestHandler = createNodeRequestHandler(app);
