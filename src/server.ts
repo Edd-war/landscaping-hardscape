@@ -50,13 +50,16 @@ app.use((req, res, next) => {
  * The server listens on the port defined by the `PORT` environment variable, or defaults to 4000.
  */
 if (isMainModule(import.meta.url) || process.env['pm_id']) {
-  const port = process.env['PORT'] || 4000;
+  const portFromEnv = Number(process.env['PUERTO_SSR_SITIO_LANDSCAPING_HARDSCAPE']);
+  const port = Number.isFinite(portFromEnv) && portFromEnv >= 1024 && portFromEnv <= 65535
+    ? portFromEnv
+    : 4052;
   app.listen(port, (error) => {
     if (error) {
       throw error;
     }
 
-    console.log(`Node Express server listening on http://localhost:${port}`);
+    console.log(`Landscaping Hardscape SSR server listening on http://localhost:${port}`);
   });
 }
 
