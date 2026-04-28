@@ -1,33 +1,35 @@
-import { Component, HostListener } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ButtonModule } from 'primeng/button';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPhone, faTimes, faBars, IconDefinition } from '@fortawesome/pro-regular-svg-icons';
 
-interface NavLink {
-  href: string;
-  label: string;
-}
+import { NavLink } from '@interfaces';
+
 
 @Component({
-  selector: 'app-site-navbar',
-  standalone: true,
-  imports: [CommonModule, ButtonModule],
-  templateUrl: './site-navbar.html'
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [FontAwesomeModule],
+	selector: 'app-site-navbar',
+	templateUrl: './site-navbar.html',
 })
 export class SiteNavbarComponent {
-  open = false;
-  
-  links: NavLink[] = [
-    { href: '#services', label: 'Services' },
-    { href: '#gallery', label: 'Gallery' },
-    { href: '#why-us', label: 'Why Us' },
-    { href: '#contact', label: 'Contact' },
-  ];
+	public faPhone: IconDefinition = faPhone;
+	public faTimes: IconDefinition = faTimes;
+	public faBars: IconDefinition = faBars;
 
-  toggleMenu() {
-    this.open = !this.open;
-  }
+	public open: boolean = false;
 
-  closeMenu() {
-    this.open = false;
-  }
+	public links: NavLink[] = [
+		{ href: '#services', label: 'Services' },
+		{ href: '#gallery', label: 'Gallery' },
+		{ href: '#why-us', label: 'Why Us' },
+		{ href: '#contact', label: 'Contact' },
+	];
+
+	public toggleMenu(): void {
+		this.open = !this.open;
+	}
+
+	public closeMenu(): void {
+		this.open = false;
+	}
 }

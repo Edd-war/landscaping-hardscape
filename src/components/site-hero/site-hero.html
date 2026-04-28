@@ -1,113 +1,100 @@
-<section
-  id="top"
-  class="relative isolate overflow-hidden border-b border-border/60"
->
-  <!-- Background image -->
-  <div class="absolute inset-0 -z-10">
-    <img
-      src="/images/hero-landscaping.jpg"
-      alt="Beautifully landscaped front yard with green lawn and pavers"
-      class="object-cover w-full h-full"
-    />
-    <div class="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent"></div>
-  </div>
+<section id="top" class="relative isolate overflow-hidden border-b border-border/60">
+	<!-- Background image with premium gradients -->
+	<div class="absolute inset-0 -z-10 animate-fade-in">
+		<img src="/images/hero-landscaping.jpg" alt="Beautifully landscaped front yard with green lawn and pavers"
+			class="object-cover w-full h-full" />
+		<div class="absolute inset-0 bg-linear-to-r from-background via-background/60 to-transparent"></div>
+		<div class="gradient-overlay opacity-40"></div>
+	</div>
 
-  <div class="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-12 lg:gap-12 lg:px-8 lg:py-36">
-    <div class="lg:col-span-7">
-      <div class="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
-        <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
-        Free Estimates
-      </div>
+	<div class="container-wide section-padding grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
+		<div class="lg:col-span-7 animate-fade-in-up">
+			<div
+				class="inline-flex items-center gap-2 rounded-lg bg-primary px-3 py-1 text-[10px] font-black uppercase tracking-wider text-primary-foreground shadow-lg shadow-primary/20">
+				<span class="h-1.5 w-1.5 rounded-full bg-primary-foreground animate-pulse"></span>
+				Free Estimates
+			</div>
 
-      <h1 class="mt-5 font-display text-5xl font-bold uppercase leading-[0.95] tracking-tight text-foreground text-balance sm:text-6xl lg:text-7xl">
-        Transforming Yards, <span class="text-primary">Building Dreams</span>
-      </h1>
+			<h1
+				class="mt-5 text-6xl font-black uppercase leading-[0.8] tracking-tighter text-balance sm:text-7xl lg:text-8xl">
+				Transforming Yards,<br />
+				<span class="text-primary">Building Dreams</span>
+			</h1>
 
-      <p class="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-        C&C Landscaping & Hardscape LLC delivers quality work and
-        reliable service across every project — from artificial turf and
-        pavers to irrigation, tree trimming, and concrete work.
-      </p>
+			<p class="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+				C&C Landscaping & Hardscape LLC delivers quality work and
+				reliable service across every project — from artificial turf and
+				pavers to irrigation, tree trimming, and concrete work.
+			</p>
 
-      <ul class="mt-6 grid max-w-lg grid-cols-2 gap-x-4 gap-y-2 text-sm text-foreground">
-        @for (item of features; track item) {
-          <li class="flex items-center gap-2">
-            <i class="pi pi-check-circle text-primary"></i>
-            <span>{{item}}</span>
-          </li>
-        }
-      </ul>
+			<ul class="mt-8 grid max-w-lg grid-cols-2 gap-x-4 gap-y-3 text-sm text-foreground">
+				@for (item of features; track item) {
+				<li class="flex items-center gap-2 group transition-all hover:translate-x-1">
+					<fa-icon [icon]="faCheckCircle" class="text-primary transition-transform group-hover:scale-110"></fa-icon>
+					<span class="font-medium italic tracking-tight">{{item}}</span>
+				</li>
+				}
+			</ul>
 
-      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-        <a
-          href="tel:6024465194"
-          class="inline-flex items-center justify-center h-12 px-8 rounded-md bg-primary font-display text-base font-bold uppercase tracking-wide text-primary-foreground hover:bg-primary/90 transition-colors"
-        >
-          <i class="pi pi-phone mr-2"></i>
-          Call 602-446-5194
-        </a>
-        <a
-          href="sms:6024465194"
-          class="inline-flex items-center justify-center h-12 px-8 rounded-md border border-primary/50 bg-transparent font-display text-base font-bold uppercase tracking-wide text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
-        >
-          <i class="pi pi-comment mr-2"></i>
-          Text for Estimate
-        </a>
-      </div>
+			<div class="mt-10 flex flex-col gap-4 sm:flex-row">
+				<a href="tel:6024465194" class="btn-primary scale-105">
+					<fa-icon [icon]="faPhone" class="mr-2"></fa-icon>
+					Call 602-446-5194
+				</a>
+				<a href="sms:6024465194" class="btn-outline border-white/20 hover:border-primary">
+					<fa-icon [icon]="faComment" class="mr-2"></fa-icon>
+					Text for Estimate
+				</a>
+			</div>
 
-      <div class="mt-6 flex items-center gap-3 text-xs uppercase tracking-widest text-muted-foreground">
-        <span class="h-px w-8 bg-border"></span>
-        Quality Work · Reliable Service
-        <span class="h-px w-8 bg-border"></span>
-      </div>
-    </div>
+			<div class="mt-8 flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-muted-foreground/60">
+				<span class="h-px w-8 bg-border"></span>
+				Quality Work · Reliable Service
+				<span class="h-px w-8 bg-border"></span>
+			</div>
+		</div>
 
-    <!-- Floating phone callout card -->
-    <div class="lg:col-span-5">
-      <div class="relative mx-auto max-w-md lg:ml-auto">
-        <div class="rounded-2xl border border-primary/30 bg-card/80 p-6 shadow-2xl backdrop-blur-sm sm:p-8">
-          <p class="font-display text-sm uppercase tracking-[0.2em] text-muted-foreground">
-            Call or Text
-          </p>
-          <a
-            href="tel:6024465194"
-            class="mt-2 block font-display text-4xl font-bold tracking-tight text-accent sm:text-5xl"
-          >
-            602-446-5194
-          </a>
-          <div class="mt-5 h-px bg-border"></div>
-          <p class="mt-5 font-display text-lg uppercase tracking-wide text-foreground">
-            Free Estimates
-          </p>
-          <p class="mt-1 text-sm text-muted-foreground">
-            Get a no-obligation quote for your next landscaping or hardscape
-            project. We respond fast.
-          </p>
-          <div class="mt-5 grid grid-cols-2 gap-3 text-center">
-            <div class="rounded-lg border border-border bg-background/60 p-3">
-              <div class="font-display text-2xl font-bold text-primary">
-                7+
-              </div>
-              <div class="text-xs uppercase tracking-wider text-muted-foreground">
-                Services
-              </div>
-            </div>
-            <div class="rounded-lg border border-border bg-background/60 p-3">
-              <div class="font-display text-2xl font-bold text-primary">
-                100%
-              </div>
-              <div class="text-xs uppercase tracking-wider text-muted-foreground">
-                Satisfaction
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          aria-hidden="true"
-          class="absolute -inset-1 -z-10 rounded-2xl bg-primary/20 blur-2xl"
-        ></div>
-      </div>
-    </div>
-  </div>
+		<!-- Floating phone callout card -->
+		<div class="lg:col-span-5 animate-fade-in-up animate-delay-200">
+			<div class="relative mx-auto max-w-md lg:ml-auto">
+				<div class="glass-card p-6 sm:p-8 shadow-2xl shadow-primary/10">
+					<p class="font-display text-xs uppercase tracking-[0.3em] text-muted-foreground/60">
+						Call or Text
+					</p>
+					<a href="tel:6024465194"
+						class="mt-2 block font-display text-5xl font-black tracking-tighter text-accent transition-transform hover:scale-105 sm:text-6xl">
+						602-446-5194
+					</a>
+					<div class="mt-8 h-px bg-white/10"></div>
+					<p class="mt-8 font-display text-xl font-bold uppercase tracking-widest text-foreground">
+						Free Estimates
+					</p>
+					<p class="mt-2 text-sm leading-relaxed text-muted-foreground/80">
+						Get a no-obligation quote for your next landscaping or hardscape
+						project. We respond fast.
+					</p>
+					<div class="mt-8 grid grid-cols-2 gap-4 text-center">
+						<div class="rounded-xl border border-primary/20 bg-black/40 p-4 transition-all hover:bg-black/60 hover:border-primary/40">
+							<div class="font-display text-2xl font-black text-primary">
+								7+
+							</div>
+							<div class="mt-1 text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
+								Services
+							</div>
+						</div>
+						<div class="rounded-xl border border-primary/20 bg-black/40 p-4 transition-all hover:bg-black/60 hover:border-primary/40">
+							<div class="font-display text-2xl font-black text-primary">
+								100%
+							</div>
+							<div class="mt-1 text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
+								Satisfaction
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Decorative glow -->
+				<div aria-hidden="true" class="absolute -inset-2 -z-10 rounded-2xl bg-primary/20 blur-3xl opacity-50 animate-pulse"></div>
+			</div>
+		</div>
+	</div>
 </section>

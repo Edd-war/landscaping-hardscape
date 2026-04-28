@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { SiteHeroComponent } from '../../../components/site-hero/site-hero';
 import { SiteMarqueeComponent } from '../../../components/site-marquee/site-marquee';
@@ -8,7 +8,7 @@ import { SiteGalleryComponent } from '../../../components/site-gallery/site-gall
 import { SiteContactComponent } from '../../../components/site-contact/site-contact';
 
 @Component({
-  selector: 'app-principal',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     SiteHeroComponent,
     SiteMarqueeComponent,
@@ -17,7 +17,8 @@ import { SiteContactComponent } from '../../../components/site-contact/site-cont
     SiteWhyUsComponent,
     SiteContactComponent
   ],
-  templateUrl: './principal.component.html'
+  selector: 'app-principal',
+  templateUrl: './principal.component.html',
 })
 export class PrincipalComponent {
 }

@@ -1,32 +1,57 @@
-import { ApplicationConfig, provideZonelessChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { provideClientHydration, withHttpTransferCacheOptions, withI18nSupport, withIncrementalHydration } from '@angular/platform-browser';
 
 // PRIMENG & ANIMATIONS
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideAnimations } from '@angular/platform-browser/animations';
+
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
+import { provideHttpClient, withFetch, withInterceptors, withXsrfConfiguration } from '@angular/common/http';
+import { dateFormatResponseInterceptor } from '@interceptors/date-format-response.interceptor';
+import { xsrfTokenInterceptor } from '@interceptors/xsrf-token.interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideZonelessChangeDetection(), 
-    provideRouter(routes), 
-    provideClientHydration(withEventReplay()),
-    provideAnimationsAsync(),
-    providePrimeNG({
-      ripple: true,
-      theme: {
-        preset: Aura,
-        options: {
-          darkModeSelector: 'system',
-          cssLayer: {
-            name: 'primeng',
-            order: 'theme, base, primeng',
-          }
-        }
-      }
-    })
-  ]
+	providers: [
+		provideBrowserGlobalErrorListeners(),
+		provideZonelessChangeDetection(),
+		provideAnimationsAsync(),
+		provideAnimations(),
+		provideRouter(routes),
+		provideClientHydration(
+			withI18nSupport(),
+			withIncrementalHydration(),
+			withHttpTransferCacheOptions({
+				includePostRequests: true,
+				includeRequestsWithAuthHeaders: true,
+			}),
+		),
+		provideHttpClient(
+			withFetch(),
+			withInterceptors([
+				dateFormatResponseInterceptor,
+				xsrfTokenInterceptor,
+			]),
+			withXsrfConfiguration({
+				cookieName: 'XSRF-TOKEN',
+				headerName: 'X-XSRF-TOKEN',
+			}),
+		),
+		providePrimeNG({
+			ripple: true,
+			theme: {
+				preset: Aura,
+				options: {
+					darkModeSelector: '.dark',
+					cssLayer: {
+						name: 'primeng',
+						order: 'theme, base, primeng',
+					}
+				}
+			}
+		})
+	]
 };

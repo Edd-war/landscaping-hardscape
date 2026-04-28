@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [],
   selector: 'app-site-marquee',
-  standalone: true,
-  templateUrl: './site-marquee.html'
+  templateUrl: './site-marquee.html',
 })
 export class SiteMarqueeComponent {
   items: string[] = [

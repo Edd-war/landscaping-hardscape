@@ -1,87 +1,151 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "cli": {
-    "packageManager": "npm",
-    "analytics": "38c2e162-99cc-4abc-9b0c-53221397cf84"
-  },
-  "newProjectRoot": "projects",
-  "projects": {
-    "landscaping-hardscape": {
-      "projectType": "application",
-      "schematics": {},
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "@angular/build:application",
-          "options": {
-            "browser": "src/main.ts",
-            "tsConfig": "tsconfig.app.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
-            "styles": [
-              "node_modules/primeicons/primeicons.css",
-              "src/styles.css"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "security": {
-              "allowedHosts": []
-            },
-            "ssr": {
-              "entry": "src/server.ts"
-            }
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
-                }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular/build:dev-server",
-          "options": {
-            "host": "127.0.0.1",
-            "port": 4200
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "landscaping-hardscape:build:production"
-            },
-            "development": {
-              "buildTarget": "landscaping-hardscape:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "test": {
-          "builder": "@angular/build:unit-test"
-        }
-      }
-    }
-  }
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"newProjectRoot": "projects",
+	"projects": {
+		"landscaping-hardscape": {
+			"projectType": "application",
+			"schematics": {},
+			"root": "",
+			"sourceRoot": "src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "@angular/build:application",
+					"options": {
+						"outputPath": {
+							"base": "dist/build/landscaping-hardscape",
+							"browser": "browser",
+							"media": "media",
+							"server": "server"
+						},
+						"outputMode": "server",
+						"browser": "src/main.ts",
+						"server": "src/main.server.ts",
+						"tsConfig": "tsconfig.app.json",
+						"ssr": {
+							"entry": "src/server.ts"
+						},
+						"index": {
+							"input": "src/index.html",
+							"output": "index.html",
+							"preloadInitial": true
+						},
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "public"
+							}
+						],
+						"inlineStyleLanguage": "css",
+						"stylePreprocessorOptions": {
+							"includePaths": [
+								"src/styles"
+							]
+						},
+						"styles": [
+							"node_modules/primeicons/primeicons.css",
+							"src/styles.css"
+						],
+						"security": {
+							"allowedHosts": []
+						}
+					},
+					"configurations": {
+						"production": {
+							"optimization": {
+								"scripts": true,
+								"styles": {
+									"minify": true,
+									"inlineCritical": true,
+									"removeSpecialComments": true
+								},
+								"fonts": {
+									"inline": true
+								}
+							},
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@angular/build:dev-server",
+					"options": {
+						"host": "127.0.0.1",
+						"port": 4200
+					},
+					"configurations": {
+						"production": {
+							"buildTarget": "landscaping-hardscape:build:production"
+						},
+						"development": {
+							"buildTarget": "landscaping-hardscape:build:development"
+						}
+					},
+					"defaultConfiguration": "development"
+				},
+				"extract-i18n": {
+					"builder": "@angular/build:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular/build:unit-test",
+					"options": {
+						"buildTarget": "landscaping-hardscape:build:development",
+						"tsConfig": "tsconfig.spec.json",
+						"runner": "vitest",
+						"runnerConfig": false,
+						"include": [
+							"**/*.spec.ts"
+						]
+					}
+				},
+				"lint": {
+					"builder": "@angular-eslint/builder:lint",
+					"options": {
+						"lintFilePatterns": [
+							"src/**/*.ts",
+							"src/**/*.html"
+						],
+						"eslintConfig": "eslint.config.js"
+					}
+				},
+				"e2e": {
+					"builder": "@angular/protractor:protractor",
+					"options": {
+						"specs": [
+							"e2e/**/*.e2e-spec.ts"
+						],
+						"devServerTarget": "landscaping-hardscape:serve"
+					},
+					"configurations": {
+						"production": {
+							"devServerTarget": "landscaping-hardscape:serve:production"
+						}
+					}
+				}
+			}
+		}
+	},
+	"cli": {
+		"packageManager": "npm",
+		"analytics": "38c2e162-99cc-4abc-9b0c-53221397cf84"
+	}
 }
