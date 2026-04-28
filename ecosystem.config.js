@@ -1,6 +1,6 @@
 module.exports = {
 	apps: [{
-		name: "ssr_landscaping_hardscape_site",
+		name: "ssr_landscaping-hardscape_site",
 		script: "npm",
 		args: "run serve:ssr:landscaping-hardscape",
 		cwd: "./",
